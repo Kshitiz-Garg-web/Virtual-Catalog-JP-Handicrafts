@@ -1,0 +1,18 @@
+{
+  "name": "full_srack_project_1_ejs",
+  "version": "1.0.0",
+  "description": "phase 1 - part 1\r ----------------\r 1. database setup\r 2. rest apis for crud",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.15.1"
+  }
+}
