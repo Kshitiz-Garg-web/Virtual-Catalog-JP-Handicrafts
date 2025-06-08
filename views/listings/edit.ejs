@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VirtualCatalog</title>
+  </head>
+  <body>
+    <h3>Edit TO existing list...</h3>
+
+    <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
+      <input
+        name="listing[title]"
+        type="text"
+        placeholder="Enter Title "
+        value="<%= listing.title %>"
+      />
+      <br /><br />
+
+      <textarea
+        name="listing[description]"
+        placeholder="Enter
+      Description "
+      >
+<%= listing.description %> </textarea
+      >
+      <br /><br />
+
+      <input
+        name="listing[image]"
+        type="text"
+        placeholder="Enter Image URL/Link "
+        value="<%= listing.image %>"
+      />
+      <br /><br />
+
+      <input
+        name="listing[price]"
+        type="number"
+        placeholder="Enter Price"
+        value="<%= listing.price %>"
+      />
+      <br /><br />
+
+      <input
+        name="listing[country]"
+        type="text"
+        placeholder="Enter Country "
+        value="<%= listing.country %>"
+      />
+      <br /><br />
+
+      <input
+        name="listing[location]"
+        type="text"
+        placeholder="Enter Location "
+        value="<%= listing.location %>"
+      />
+      <br /><br />
+
+      <button>Edit</button>
+    </form>
+  </body>
+</html>

@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 
 const path = require("path");
 
@@ -24,6 +25,7 @@ async function main() {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 app.get("/", (req, res) => {
   res.send("yes i am root");
@@ -34,6 +36,10 @@ app.get("/listings", async (req, res) => {
   res.render("listings/index.ejs", { allListings });
 });
 
+app.get("/listings/new", (req, res) => {
+  res.render("listings/new.ejs");
+});
+
 app.get("/listings/:id", async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
@@ -41,19 +47,33 @@ app.get("/listings/:id", async (req, res) => {
   res.render("listings/show.ejs", { listing });
 });
 
-// app.get("/listing", async (req, res) => {
-//   let sampleListing = new Listing({
-//     title: "my new home",
-//     description: "by the beach",
-//     price: 1200,
-//     location: "meerut",
-//     country: "india",
-//   });
+app.post("/listings", async (req, res) => {
+  const newListingData = req.body.listing;
+  const newListing = new Listing(newListingData);
+  await newListing.save();
+  // console.log(newListingData);
+  res.redirect("/listings");
+});
 
-//   await sampleListing.save();
-//   console.log("sample was saved");
-//   res.send("successful testing");
-// });
+app.get("/listings/:id/edit", async (req, res) => {
+  const { id } = req.params;
+  const listing = await Listing.findById(id);
+  res.render("listings/edit.ejs", { listing });
+});
+
+app.put("/listings/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body.listing;
+  await Listing.findByIdAndUpdate(id, { ...updatedData });
+  res.redirect(`/listings/${id}`);
+});
+
+app.delete("/listings/:id", async (req, res) => {
+  const { id } = req.params;
+  const deletedListings = await Listing.findByIdAndDelete(id);
+  console.log(deletedListings);
+  res.redirect("/listings");
+});
 
 app.listen(8080, () => {
   console.log("server is listening to port 8080");

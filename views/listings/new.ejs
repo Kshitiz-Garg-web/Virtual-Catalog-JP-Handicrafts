@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VirtualCatalog</title>
+  </head>
+  <body>
+    <h3>create new form</h3>
+
+    <form action="/listings" method="POST">
+      <input name="listing[title]" type="text" placeholder="Enter Title " />
+      <br /><br />
+
+      <textarea
+        name="listing[description]"
+        placeholder="Enter
+      Description "
+      ></textarea>
+      <br /><br />
+
+      <input
+        name="listing[image]"
+        type="text"
+        placeholder="Enter Image URL/Link "
+      />
+      <br /><br />
+
+      <input name="listing[price]" type="number" placeholder="Enter Price" />
+      <br /><br />
+
+      <input name="listing[country]" type="text" placeholder="Enter Country " />
+      <br /><br />
+
+      <input
+        name="listing[location]"
+        type="text"
+        placeholder="Enter Location "
+      />
+      <br /><br />
+
+      <button>Add</button>
+    </form>
+  </body>
+</html>
