@@ -36,6 +36,7 @@ app.get("/", (req, res) => {
 
 app.get("/listings", async (req, res) => {
   const allListings = await Listing.find({});
+  console.log(allListings);
   res.render("listings/index.ejs", { allListings });
 });
 
@@ -46,7 +47,7 @@ app.get("/listings/new", (req, res) => {
 app.get("/listings/:id", async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
-  console.log(listing.price);
+  console.log(listing);
   res.render("listings/show.ejs", { listing });
 });
 
