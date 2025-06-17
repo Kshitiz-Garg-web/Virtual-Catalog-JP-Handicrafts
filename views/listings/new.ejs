@@ -8,15 +8,19 @@
 
         <h3 class="mt-2 mt-md-1  ">Create new form</h3>
 
-        <form action="/listings" method="POST">
+        <form class="needs-validation" action="/listings" method="POST" novalidate>
           <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input id="title" name="listing[title]" type="text" class="form-control" />
+            <input required id="title" name="listing[title]" type="text" class="form-control" />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please fill it in.</div>
           </div>
 
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea id="description" class="form-control" name="listing[description]"></textarea>
+            <textarea required id="description" class="form-control" name="listing[description]"></textarea>
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please fill it in.</div>
           </div>
 
 
@@ -28,18 +32,24 @@
           <div class="row ">
             <div class="mb-3 col-md-4 ">
               <label for="price" class="form-label">Price</label>
-              <input id="price" class="form-control" name="listing[price]" type="number" />
+              <input required id="price" class="form-control" name="listing[price]" type="number" />
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Please fill it in.</div>
             </div>
 
             <div class="mb-3 col-md-8">
               <label for="country" class="form-label">Country</label>
-              <input id="country" class="form-control" name="listing[country]" type="text" />
+              <input required id="country" class="form-control" name="listing[country]" type="text" />
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Please fill it in.</div>
             </div>
           </div>
 
           <div class="mb-3">
             <label for="location" class="form-label">Location</label>
-            <input id="location" class="form-control" name="listing[location]" type="text" />
+            <input required id="location" class="form-control" name="listing[location]" type="text" />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please fill it in.</div>
           </div>
 
           <button class="btn add-btn btn-dark mt-2 mb-5 mt-md-0 mb-md-0"> Add</button>
