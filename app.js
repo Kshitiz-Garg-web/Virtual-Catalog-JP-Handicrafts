@@ -8,6 +8,9 @@ const path = require("path");
 const Listing = require("./models/listing");
 const wrapAsync = require('./utils/wrapAsyc.js')
 const ExpressError = require('./utils/ExpressError.js')
+const listingSchema = require('./schema.js')
+
+
 
 const app = express();
 
@@ -37,9 +40,19 @@ app.get("/", (req, res) => {
   res.send("yes i am root");
 });
 
+const validateListing = (req, res, next) => {
+  let result = listingSchema.validate(req.body);
+  if (result.error) {
+    let errMsg = result.error.details.map((eachDetails) => eachDetails.message).join("<___Kshitiz___Garg___>")
+    throw new ExpressError(400, errMsg);
+  } else {
+    next();
+  }
+}
+
 app.get("/listings", wrapAsync(async (req, res) => {
   const allListings = await Listing.find({});
-  console.log(allListings);
+
   res.render("listings/index.ejs", { allListings });
 }));
 
@@ -54,12 +67,15 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
   res.render("listings/show.ejs", { listing });
 }));
 
-app.post("/listings", wrapAsync(async (req, res, next) => {
-  if (!req.body.listing) {
-    throw new ExpressError(400, 'send valid data for listing')
-  }
+app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
+  // bcz this part is covered by joi and also a each item 
+  // if (!req.body.listing) {
+  //   throw new ExpressError(400, 'send valid data for listing')
+  // }
+
   const newListingData = req.body.listing;
   const newListing = new Listing(newListingData);
+
   await newListing.save();
   // console.log(newListingData);
   res.redirect("/listings");
@@ -71,10 +87,17 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
   res.render("listings/edit.ejs", { listing });
 }));
 
-app.put("/listings/:id", wrapAsync(async (req, res) => {
-  if (!req.body.listing) {
-    throw new ExpressError(400, 'send valid data for listing')
+app.put("/listings/:id", validateListing, wrapAsync(async (req, res) => {
+  // if (!req.body.listing) {
+  //   throw new ExpressError(400, 'send valid data for listing')
+  // }
+
+  let result = listingSchema.validate(req.body);
+  console.log(result)
+  if (result.error) {
+    throw new ExpressError(400, result.error)
   }
+
   const { id } = req.params;
   const updatedData = req.body.listing;
   await Listing.findByIdAndUpdate(id, { ...updatedData });
