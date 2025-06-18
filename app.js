@@ -95,8 +95,9 @@ app.use((req, res, next) => {
 
 
 app.use((err, req, res, next) => {
-  const { statusCode = 500, message = "Something went wrong!" } = err;
-  res.status(statusCode).send(`status code h ${statusCode} Error - ${message}`);
+  let { statusCode = 500, message = "Something went wrong!" } = err;
+  res.status(statusCode).render('error.ejs', { statusCode, message });
+
 });
 
 
