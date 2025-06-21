@@ -50,16 +50,19 @@ const validateListing = (req, res, next) => {
   }
 }
 
+//get lisitng page
 app.get("/listings", wrapAsync(async (req, res) => {
   const allListings = await Listing.find({});
 
   res.render("listings/index.ejs", { allListings });
 }));
 
+//get new lisitng add form
 app.get("/listings/new", (req, res) => {
   res.render("listings/new.ejs");
 });
 
+//get deatil page of single lisitng by using id
 app.get("/listings/:id", wrapAsync(async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
@@ -67,6 +70,7 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
   res.render("listings/show.ejs", { listing });
 }));
 
+//post hit for backend to add new lisiting 
 app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
   // bcz this part is covered by joi and also a each item 
   // if (!req.body.listing) {
@@ -81,12 +85,14 @@ app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
   res.redirect("/listings");
 }))
 
+//get edit listing page 
 app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
   res.render("listings/edit.ejs", { listing });
 }));
 
+// put hit for backend to edit the lisitng finally
 app.put("/listings/:id", validateListing, wrapAsync(async (req, res) => {
   // if (!req.body.listing) {
   //   throw new ExpressError(400, 'send valid data for listing')
@@ -104,6 +110,7 @@ app.put("/listings/:id", validateListing, wrapAsync(async (req, res) => {
   res.redirect(`/listings/${id}`);
 }));
 
+// delete hit for backend to delelte the lisitng finally from edit page
 app.delete("/listings/:id", wrapAsync(async (req, res) => {
   const { id } = req.params;
   const deletedListings = await Listing.findByIdAndDelete(id);

@@ -103,6 +103,7 @@ body {
   text-align: center;
   display: flex;
   align-items: center;
+  column-gap: 4px;
 }
 
 .form-delete{
@@ -127,6 +128,4 @@ body {
 
 .err-body:hover{
   background-color: #eaabab6b;
- 
 }
-
