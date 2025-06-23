@@ -3,16 +3,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
-  comment: String,
+  comment: {
+    type: String,
+    required: true,
+  },
   rating: {
     type: Number,
     required: true,
-    min:0,
-    max:5
+    min: 0,
+    max: 5
   },
-  ceartAt:{
+  ceartAt: {
     type: Date,
-    default:Date.now(),
+    default: Date.now()
   },
 });
 

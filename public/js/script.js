@@ -25,5 +25,5 @@
   rangeOutput.textContent = rangeInput.value;
 
   rangeInput.addEventListener('input', function() {
-    rangeOutput.textContent = this.value/10;
+    rangeOutput.textContent = this.value;
   });

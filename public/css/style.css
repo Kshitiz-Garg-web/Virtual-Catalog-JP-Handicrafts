@@ -129,3 +129,37 @@ body {
 .err-body:hover{
   background-color: #eaabab6b;
 }
+
+/* styling for review portion */
+.review-container{
+  /* background-color: red !important; */
+  /* padding: 0 !important; */
+}
+
+.review-card{
+  /* background-color: rgb(0, 255, 30) !important; */
+  word-wrap: break-word;
+}
+
+.review-card{
+  /* background-color: red; */
+  border-radius: 3px;
+  margin-bottom: 4px;
+  
+ 
+}
+
+.rating-delete-raper{
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  text-align: center;
+  
+}
+
+.rating-delete-raper button{
+  border: none;
+  background-color: #ffffff00;
+}

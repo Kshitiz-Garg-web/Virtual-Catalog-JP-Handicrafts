@@ -20,7 +20,7 @@ async function main() {
 const initDB = async () => {
   await Listing.deleteMany({});
   await Listing.insertMany(initData.data);
-  console.log("saved hua h see");
+  console.log("saved hua---- listings ----sab ok");
 };
 
 initDB();

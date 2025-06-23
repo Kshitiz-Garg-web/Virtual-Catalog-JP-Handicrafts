@@ -30,6 +30,16 @@ const listingSchema = new Schema({
   ]
 });
 
+listingSchema.post('findOneAndDelete', async (listing) => {
+  try {
+    if (listing) {
+      await Review.deleteMany({ _id: { $in: listing.reviews } });
+    }
+  } catch (err) {
+    console.error("Error inside Mongoose middleware:", err);
+  }
+});
+
 const Listing = mongoose.model("Listing", listingSchema);
 
 module.exports = Listing;
