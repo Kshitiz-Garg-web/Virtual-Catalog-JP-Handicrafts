@@ -1,7 +1,7 @@
 {
   "name": "full_srack_project_1_ejs",
   "version": "1.0.0",
-  "description": "phase 1 - part 1\r ----------------\r 1. database setup\r 2. rest apis for crud",
+  "description": "still working",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

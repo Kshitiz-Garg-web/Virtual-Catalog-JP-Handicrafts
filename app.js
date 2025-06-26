@@ -5,15 +5,16 @@ const ejsMate = require("ejs-mate");
 
 const path = require("path");
 
-const Listing = require("./models/listing");
-const wrapAsync = require('./utils/wrapAsyc.js')
 const ExpressError = require('./utils/ExpressError.js')
-const { listingSchema, reviewSchema } = require('./schema.js')
-const Review = require('./models/review.js')
+
+//Router
+const listings = require('./routes/listing.js')
+const reviews = require('./routes/review.js')
+
 
 const app = express();
-
 const MONGO_URL = "mongodb://127.0.0.1:27017/VirtualCatalog";
+
 
 main()
   .then(() => {
@@ -35,141 +36,24 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.json());
 
+
 app.get("/", (req, res) => {
   res.send("yes i am root");
 });
 
-const validateListing = (req, res, next) => {
-  let result = listingSchema.validate(req.body);
-  if (result.error) {
-    let errMsg = result.error.details.map((eachDetails) => eachDetails.message).join("<___Kshitiz___Garg___>")
-    throw new ExpressError(400, errMsg);
-  } else {
-    next();
-  }
-}
-
-const validateReview = (req, res, next) => {
-  let result = reviewSchema.validate(req.body);
-  if (result.error) {
-    let errMsg = result.error.details.map((eachDetails) => eachDetails.message).join("<___Kshitiz___Garg___>")
-    throw new ExpressError(400, errMsg);
-  } else {
-    next();
-  }
-}
-
-//get lisitng page
-app.get("/listings", wrapAsync(async (req, res) => {
-  const allListings = await Listing.find({});
-
-  res.render("listings/index.ejs", { allListings });
-}));
-
-//get new lisitng add form
-app.get("/listings/new", (req, res) => {
-  res.render("listings/new.ejs");
-});
-
-//get deatil page of single lisitng by using id
-app.get("/listings/:id", wrapAsync(async (req, res) => {
-  const { id } = req.params;
-  const listing = await Listing.findById(id).populate("reviews");
-  console.log(listing);
-  res.render("listings/show.ejs", { listing });
-}));
-
-//post hit for backend to add new lisiting 
-app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
-  // bcz this part is covered by joi and also a each item 
-  // if (!req.body.listing) {
-  //   throw new ExpressError(400, 'send valid data for listing')
-  // }
-
-  const newListingData = req.body.listing;
-  const newListing = new Listing(newListingData);
-
-  await newListing.save();
-  // console.log(newListingData);
-  res.redirect("/listings");
-}))
-
-//get edit listing page 
-app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
-  const { id } = req.params;
-  const listing = await Listing.findById(id);
-  res.render("listings/edit.ejs", { listing });
-}));
-
-// put hit for backend to edit the lisitng finally
-app.put("/listings/:id", validateListing, wrapAsync(async (req, res) => {
-  // if (!req.body.listing) {
-  //   throw new ExpressError(400, 'send valid data for listing')
-  // }
-
-  let result = listingSchema.validate(req.body);
-  console.log(result)
-  if (result.error) {
-    throw new ExpressError(400, result.error)
-  }
-
-  const { id } = req.params;
-  const updatedData = req.body.listing;
-  await Listing.findByIdAndUpdate(id, { ...updatedData });
-  res.redirect(`/listings/${id}`);
-}));
-
-// delete hit for backend to delelte the lisitng finally from edit page
-app.delete("/listings/:id", wrapAsync(async (req, res) => {
-  const { id } = req.params;
-  const deletedListings = await Listing.findByIdAndDelete(id);
-  console.log(deletedListings);
-  res.redirect("/listings");
-}));
-
-//reviwe 
-app.post("/listings/:id/reviews", validateReview, wrapAsync(async (req, res) => {
-  const id = req.params.id
-  const newReviewData = req.body.review
-
-  const listing = await Listing.findById(id);
-  const newReview = new Review(newReviewData)
-  listing.reviews.push(newReview)
-
-  console.log(newReview)
-
-  await newReview.save();
-  await listing.save();
-
-  res.redirect(`/listings/${id}`)
-}))
-
-// delete to single review
-app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async (req, res) => {
-  let { id, reviewId } = req.params;
-  // console.log('id - ', id)
-  // console.log('id_Review - ', reviewId)
-
-  await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } })
-  await Review.findByIdAndDelete(reviewId);
-
-
-  res.redirect(`/listings/${id}`)
-}))
-
+app.use("/listings", listings)
+app.use('/listings/:id/reviews', reviews)
 
 app.use((req, res, next) => {
   next(new ExpressError(404, "Page Not Found"));
 });
-
-
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went wrong!" } = err;
   res.status(statusCode).render('error.ejs', { statusCode, message });
-
 });
 
 
 app.listen(8080, () => {
   console.log("server is listening to port 8080");
 });
+
