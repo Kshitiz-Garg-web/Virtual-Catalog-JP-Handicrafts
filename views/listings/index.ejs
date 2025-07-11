@@ -1,12 +1,13 @@
 <% layout('/layouts/boilerplate') -%>
 
   <body>
-    <h3>All Listing</h3>
+    <h3>Wander with Sphere</h3>
     <!-- <form action="/listings/new" method="GET">
       <button>Add New Listing</button>
     </form> -->
 
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    
       <% for (let listing of allListings) { %>
         <a href="/listings/<%= listing._id %>" class="listing-link">
           <div class="card">

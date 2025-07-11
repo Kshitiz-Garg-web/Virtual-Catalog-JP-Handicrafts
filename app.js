@@ -5,15 +5,19 @@ const ejsMate = require("ejs-mate");
 // const cookieParser = require('cookie-parser')
 const seassion = require("express-session")
 const flash = require("connect-flash")
-
+const passport = require("passport")
+const LocalStrategy = require("passport-local")
 
 const path = require("path");
 
 const ExpressError = require('./utils/ExpressError.js')
-
 //Router
-const listings = require('./routes/listing.js')
-const reviews = require('./routes/review.js')
+const listingRouter = require('./routes/listing.js')
+const reviewRouter = require('./routes/review.js')
+const userRouter= require('./routes/user.js')
+//Model
+const User = require("./models/user.js")
+
 
 
 const app = express();
@@ -46,13 +50,24 @@ const seassionOptions = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-    expire: Date.now() + 20 * 24 * 60 * 60 * 1000,
+    expires: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000),
     maxAge: 20 * 24 * 60 * 60 * 1000,
     httpOnly: true
   }
 }
 app.use(seassion(seassionOptions));
 app.use(flash())
+
+// configure basic setting
+app.use(passport.initialize())
+app.use(passport.session())
+// To setup Passport-Local Mongoose use this code
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 
 app.get("/", (req, res) => {
@@ -67,8 +82,9 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use("/listings", listings)
-app.use('/listings/:id/reviews', reviews)
+app.use("/listings", listingRouter)
+app.use('/listings/:id/reviews', reviewRouter)
+app.use('/',userRouter)
 
 app.use((req, res, next) => {
   next(new ExpressError(404, "Page Not Found"));
