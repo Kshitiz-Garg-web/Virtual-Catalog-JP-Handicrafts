@@ -14,9 +14,11 @@ const ExpressError = require('./utils/ExpressError.js')
 //Router
 const listingRouter = require('./routes/listing.js')
 const reviewRouter = require('./routes/review.js')
-const userRouter= require('./routes/user.js')
+const userRouter = require('./routes/user.js')
 //Model
 const User = require("./models/user.js")
+//middleware
+
 
 
 
@@ -77,6 +79,7 @@ app.get("/", (req, res) => {
 app.use((req, res, next) => {
   res.locals.success = req.flash('success')
   res.locals.error = req.flash('error')
+  res.locals.currUser = req.user;
   console.log("success key -> ", res.locals.success)
   console.log("error key -> ", res.locals.error)
   next()
@@ -84,7 +87,7 @@ app.use((req, res, next) => {
 
 app.use("/listings", listingRouter)
 app.use('/listings/:id/reviews', reviewRouter)
-app.use('/',userRouter)
+app.use('/', userRouter)
 
 app.use((req, res, next) => {
   next(new ExpressError(404, "Page Not Found"));
