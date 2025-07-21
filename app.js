@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV != "production") {
+  require('dotenv').config()
+}
 const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
@@ -24,6 +27,16 @@ const User = require("./models/user.js")
 
 const app = express();
 const MONGO_URL = "mongodb://127.0.0.1:27017/VirtualCatalog";
+const seassionOptions = {
+  secret: "mysuperpassofsec",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000),
+    maxAge: 20 * 24 * 60 * 60 * 1000,
+    httpOnly: true
+  }
+}
 
 
 main()
@@ -46,17 +59,6 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.json());
 // app.use(cookieParser("secretcode"))
-
-const seassionOptions = {
-  secret: "mysuperpassofsec",
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    expires: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000),
-    maxAge: 20 * 24 * 60 * 60 * 1000,
-    httpOnly: true
-  }
-}
 app.use(seassion(seassionOptions));
 app.use(flash())
 

@@ -8,11 +8,13 @@
     </div>
 
     <div class="card col-12 col-md-8 offset-md-2">
-      <img src="<%= listing.image %>" class="card-img-top show-img" alt="listing_image">
+      <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
       <div class="card-body">
         <p class="card-text">
         <h4>Hosted by
-          <span style="color: #fe424d;"><%= listing.owner.username %></span>
+          <span style="color: #fe424d;">
+            <%= listing.owner.username %>
+          </span>
         </h4>
         <%= listing.description %> <br>
           <b> &#8377;</b>
@@ -82,11 +84,11 @@
                     <div class="rating-delete-raper">
 
                       <b>⭐<%= review.rating %></b>
-                      <% if(currUser._id.equals(review.author._id)){%>
-                      <form method="POST"
-                        action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-                        <button class="btn"><i class="fa-solid fa-trash-can"></i></button>
-                      </form>
+                      <% if(currUser && currUser._id.equals(review.author._id)){%>
+                        <form method="POST"
+                          action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                          <button class="btn"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
                         <%}%>
                     </div>
 

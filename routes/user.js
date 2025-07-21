@@ -3,58 +3,29 @@ const passport = require('passport');
 
 const User = require('../models/user');
 const wrapAsync = require('../utils/wrapAsyc');
-
+const { getSignupPage, signup_addCredentials, loginPage, login_checkCredentials, logout } = require('../controllers/users')
 
 const router = express.Router();
 
+router.route('/signup')
+  // signup-page, Get
+  .get(getSignupPage)
+  // signup, add-credentials, Post
+  .post(wrapAsync(signup_addCredentials));
 
-router.get('/signup', (req, res) => {
-  res.render("users/signup.ejs")
-})
+router.route('/login')
+  // loginPage, Get
+  .get(loginPage)
+  // login, check_Credentials, Post
+  .post(
+    passport.authenticate('local',
+      {
+        failureFlash: true,
+        failureRedirect: "/login"
+      }),
+    login_checkCredentials);
 
-router.post('/signup', wrapAsync(async (req, res, next) => {
-  try {
-    console.log(req.body)
-    let { username, email, password } = req.body;
-    const newUser = new User({ email, username })
-    const registeredUser = await User.register(newUser, password);
-    console.log(registeredUser)
-
-    req.login(registeredUser, (err) => {
-      if (err) {
-        return next(err)
-      }
-      req.flash('success', "Welcome to Sphere")
-      return res.redirect('/listings')
-    })
-  } catch (e) {
-    req.flash('error', e.message)
-    res.redirect('/signup')
-  }
-}))
-
-router.get('/login', (req, res) => {
-  res.render("users/login.ejs")
-})
-
-router.post('/login',
-  passport.authenticate('local', {
-    failureFlash: true,
-    failureRedirect: "/login"
-  }),
-  async (req, res) => {
-    req.flash('success', "Welcome back to Sphere")
-    res.redirect('/listings')
-  })
-
-router.get('/logout', (req, res, next) => {
-  req.logOut((err) => {
-    if (err) {
-      return next(err)
-    }
-    req.flash('success', "you are logged out!")
-    return res.redirect('/listings')
-  })
-})
+// logout, delete_Credentials, Delelte
+router.get('/logout', logout)
 
 module.exports = router;
