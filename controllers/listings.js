@@ -1,4 +1,5 @@
 const Listing = require('../models/listing')
+const { cloudinary } = require('../cloudinary');
 
 //index-page, Get
 module.exports.index = async (req, res) => {
@@ -64,20 +65,81 @@ module.exports.editListingPage = async (req, res) => {
   res.render("listings/edit.ejs", { listing });
 }
 
+
+https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,h_200,w_200/r_max/f_auto/woman-blackdress-stairs.png
+
+
+// // update-listing-details, Put
+// module.exports.updateListingDetails = async (req, res) => {
+//   const { id } = req.params;
+
+//   const updatedData = req.body.listing;
+//   const updateListing = await Listing.findByIdAndUpdate(id, { ...updatedData });
+
+//   if (req.file) {
+//     const url = req.file.path;
+//     const filename = req.file.filename;
+//     updateListing.image = { url, filename }
+//     await updateListing.save()
+//   }
+
+//   req.flash("success", "Linting Updated!")
+//   res.redirect(`/listings/${id}`);
+// }
+
 // update-listing-details, Put
 module.exports.updateListingDetails = async (req, res) => {
   const { id } = req.params;
+
   const updatedData = req.body.listing;
-  await Listing.findByIdAndUpdate(id, { ...updatedData });
-  req.flash("success", "Linting Updated!")
+  const listing = await Listing.findByIdAndUpdate(id, { ...updatedData }, { new: true });
+
+  // Agar nayi image upload hui hai
+  if (req.file) {
+    // Purani image delete karo (Cloudinary se)
+    if (listing.image && listing.image.filename) {
+      await cloudinary.uploader.destroy(listing.image.filename); // filename = public_id
+    }
+
+    // Nayi image add karo
+    listing.image = {
+      url: req.file.path,
+      filename: req.file.filename,
+    };
+
+    await listing.save();
+  }
+
+  req.flash("success", "Listing Updated!");
   res.redirect(`/listings/${id}`);
-}
+};
+
+// delete-listing, Delete
+// module.exports.deleteListing = async (req, res) => {
+//   const { id } = req.params;
+//   const deletedListings = await Listing.findByIdAndDelete(id);
+//   console.log(deletedListings);
+//   req.flash("success", "Listing Deleted!")
+//   res.redirect("/listings");
+// }
 
 // delete-listing, Delete
 module.exports.deleteListing = async (req, res) => {
-  const { id } = req.params;
-  const deletedListings = await Listing.findByIdAndDelete(id);
-  console.log(deletedListings);
-  req.flash("success", "Listing Deleted!")
-  res.redirect("/listings");
-}
+  try {
+    const { id } = req.params;
+    const listing = await Listing.findById(id);
+
+    if (listing && listing.image && listing.image.filename) {
+      await cloudinary.uploader.destroy(listing.image.filename);
+    }
+
+    await Listing.findByIdAndDelete(id);
+
+    req.flash('success', 'Listing Deleted!');
+    res.redirect('/listings');
+  } catch (err) {
+    console.error('Error deleting listing:', err);
+    req.flash('error', 'Something went wrong!');
+    res.redirect('/listings');
+  }
+};

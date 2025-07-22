@@ -33,6 +33,7 @@ router.route('/:id')
   .put(
     isLoggedIn,
     isOwner,
+    upload.single('listing[image]'),
     validateListing,
     wrapAsync(updateListingDetails))
   // delete-listing, Delete
