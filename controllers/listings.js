@@ -15,7 +15,6 @@ module.exports.newListingForm = (req, res) => {
 //detaile-listing-page, Get
 module.exports.detaileListingPage = async (req, res) => {
   const { id } = req.params;
-  // const listing = await Listing.findById(id).populate("reviews").populate('owner')
   const listing = await Listing.findById(id)
     .populate({
       path: "reviews",
@@ -31,7 +30,6 @@ module.exports.detaileListingPage = async (req, res) => {
     return res.redirect("/listings");
   }
 
-  console.log(listing);
   res.render("listings/show.ejs", { listing });
 }
 
@@ -65,28 +63,6 @@ module.exports.editListingPage = async (req, res) => {
   res.render("listings/edit.ejs", { listing });
 }
 
-
-https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,h_200,w_200/r_max/f_auto/woman-blackdress-stairs.png
-
-
-// // update-listing-details, Put
-// module.exports.updateListingDetails = async (req, res) => {
-//   const { id } = req.params;
-
-//   const updatedData = req.body.listing;
-//   const updateListing = await Listing.findByIdAndUpdate(id, { ...updatedData });
-
-//   if (req.file) {
-//     const url = req.file.path;
-//     const filename = req.file.filename;
-//     updateListing.image = { url, filename }
-//     await updateListing.save()
-//   }
-
-//   req.flash("success", "Linting Updated!")
-//   res.redirect(`/listings/${id}`);
-// }
-
 // update-listing-details, Put
 module.exports.updateListingDetails = async (req, res) => {
   const { id } = req.params;
@@ -113,15 +89,6 @@ module.exports.updateListingDetails = async (req, res) => {
   req.flash("success", "Listing Updated!");
   res.redirect(`/listings/${id}`);
 };
-
-// delete-listing, Delete
-// module.exports.deleteListing = async (req, res) => {
-//   const { id } = req.params;
-//   const deletedListings = await Listing.findByIdAndDelete(id);
-//   console.log(deletedListings);
-//   req.flash("success", "Listing Deleted!")
-//   res.redirect("/listings");
-// }
 
 // delete-listing, Delete
 module.exports.deleteListing = async (req, res) => {

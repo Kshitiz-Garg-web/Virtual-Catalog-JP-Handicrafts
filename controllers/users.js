@@ -8,11 +8,9 @@ module.exports.getSignupPage = (req, res) => {
 // signup, add-credentials, Post
 module.exports.signup_addCredentials = async (req, res, next) => {
   try {
-    console.log(req.body)
     let { username, email, password } = req.body;
     const newUser = new User({ email, username })
     const registeredUser = await User.register(newUser, password);
-    console.log(registeredUser)
 
     req.login(registeredUser, (err) => {
       if (err) {

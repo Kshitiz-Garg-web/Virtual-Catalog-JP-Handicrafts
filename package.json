@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "v20.17.0"
+  },
   "name": "full_srack_project_1_ejs",
   "version": "1.0.0",
   "description": "still working",
@@ -13,6 +16,7 @@
   "dependencies": {
     "cloudinary": "^2.7.0",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.0",
     "ejs": "^3.1.10",

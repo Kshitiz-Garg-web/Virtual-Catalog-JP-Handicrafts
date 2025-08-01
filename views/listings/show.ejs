@@ -8,27 +8,38 @@
     </div>
 
     <div class="card col-12 col-md-8 offset-md-2">
-      <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
+      <img src="<%= listing.image.url %>" class=" show-img" alt="listing_image">
       <div class="card-body">
-        <p class="card-text">
-        <h4>Hosted by
-          <span style="color: #fe424d;">
-            <%= listing.owner.username %>
-          </span>
-        </h4>
-        <%= listing.description %> <br>
-          <b> &#8377;</b>
-          <%= listing.price%> / night <br>
-            <%= listing.location %><b>,</b>
-              <%= listing.country %>
-                </p>
+        <h3>✨ Namaste...</h3>
+        <p><b><i>Each creation reflects love, culture & blessings — JP Handicrafts 🧵🎨</i></b></p>
+        <hr>
+        <div class="details">
+          <p>
+            <b>About this item: </b>
+            <%= listing.description %>
+          </p>
+          <p>
+            <b>Price: </b>
+            <b> &#8377;</b>
+            <%= listing.price.toLocaleString('en-IN')%> / pic
+          </p>
+          <p>
+            <b>Materil: </b>
+            <%= listing.dimension %>
+          </p>
+          <p>
+            <b>Dimensions: </b>
+            <%= listing.material %>
+          </p>
+        </div>
       </div>
+
     </div>
 
     <% if( currUser && currUser._id.equals(listing.owner._id)) { %>
       <br>
       <div class="btns mb-3 ">
-        <a class="btn  show-both-btn btn-dark col-1 offset-md-2 edit-btn"
+        <a class="btn show-both-btn btn-dark col-1 offset-md-2 edit-btn"
           href="/listings/<%=listing._id %>/edit">Edit</a>
         <br /><br />
         <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">

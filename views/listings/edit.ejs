@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-8 offset-2">
 
-        <h3 class="mt-2 mt-md-1  ">Edit This Listing on Sphere</h3>
+        <h3 class="mt-2 mt-md-1  ">Customize Your Catalog Entry</h3>
 
         <form class="needs-validation" action="/listings/<%= listing._id %>?_method=PUT" method="POST" novalidate
           enctype="multipart/form-data">
@@ -41,18 +41,18 @@
             </div>
 
             <div class="mb-3 col-md-8">
-              <label for="country" class="form-label">Country</label>
-              <input required id="country" class="form-control" name="listing[country]" type="text"
-                value="<%= listing.country %>" />
+              <label for="material" class="form-label">Material</label>
+              <input required id="material" class="form-control" name="listing[material]" type="text"
+                value="<%= listing.material %>" />
               <div class="valid-feedback">Looks good!</div>
               <div class="invalid-feedback">Please fill it in.</div>
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input required id="location" class="form-control" name="listing[location]" type="text"
-              value="<%= listing.location %>" />
+            <label for="dimension" class="form-label">Dimension</label>
+            <input required id="dimension" class="form-control" name="listing[dimension]" type="text"
+              value="<%= listing.dimension %>" />
             <div class="valid-feedback">Looks good!</div>
             <div class="invalid-feedback">Please fill it in.</div>
           </div>

@@ -1,13 +1,12 @@
 <% layout('/layouts/boilerplate') -%>
 
   <body>
-    <h3>Wander with Sphere</h3>
-    <!-- <form action="/listings/new" method="GET">
-      <button>Add New Listing</button>
-    </form> -->
+    <h4>✨ Namaste...</h4>
+    <p><b><i>Each creation reflects love, culture & blessings — JP Handicrafts 🧵🎨</i></b></p>
+    <hr>
 
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-    
+
       <% for (let listing of allListings) { %>
         <a href="/listings/<%= listing._id %>" class="listing-link">
           <div class="card">
@@ -19,8 +18,7 @@
                 </b>
                 <br />
                 <b> &#8377;</b>
-                <%= listing.price%> / night <br>
-
+                <%= listing.price.toLocaleString('en-IN')%> / Pic <br>
               </p>
             </div>
           </div>

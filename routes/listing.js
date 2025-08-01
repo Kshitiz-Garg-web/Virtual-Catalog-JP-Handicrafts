@@ -3,7 +3,7 @@ const multer = require('multer')
 const { storage, cloudinary } = require('../cloudinary.js')
 
 const wrapAsync = require('../utils/wrapAsyc.js')
-const { isLoggedIn, isOwner, validateListing } = require('../middleware.js')
+const { isLoggedIn, isOwner, validateListing, isVirtual_Catalog_Owner_With_Shayam_Baba_Ashirwad } = require('../middleware.js')
 const { index, newListingForm, detaileListingPage, addNewListingDetails, editListingPage, updateListingDetails, deleteListing } = require('../controllers/listings.js')
 
 
@@ -16,6 +16,7 @@ router.route("/")
   // add-new-listing-details, Post
   .post(
     isLoggedIn,
+    isVirtual_Catalog_Owner_With_Shayam_Baba_Ashirwad,
     validateListing,
     upload.single('listing[image]'),
     wrapAsync(addNewListingDetails));
@@ -24,6 +25,7 @@ router.route("/")
 //new-listing-form, Get
 router.get("/new",
   isLoggedIn,
+  isVirtual_Catalog_Owner_With_Shayam_Baba_Ashirwad,
   newListingForm);
 
 router.route('/:id')
@@ -32,19 +34,22 @@ router.route('/:id')
   // update-listing-details, Put
   .put(
     isLoggedIn,
-    isOwner,
+    isVirtual_Catalog_Owner_With_Shayam_Baba_Ashirwad,
+    isOwner, // yha middleware ek trika s kam isi k kr rha h ---> isVirtual_Catalog_Owner_With_Shayam_Baba_Ashirwad <--- bcz jab ek hi user lisiting kr rha h to fr owner kable whi hoga n
     upload.single('listing[image]'),
     validateListing,
     wrapAsync(updateListingDetails))
   // delete-listing, Delete
   .delete(
     isLoggedIn,
+    isVirtual_Catalog_Owner_With_Shayam_Baba_Ashirwad,
     isOwner,
     wrapAsync(deleteListing));
 
 // edit-listing-page, Get
 router.get("/:id/edit",
   isLoggedIn,
+  isVirtual_Catalog_Owner_With_Shayam_Baba_Ashirwad,
   isOwner,
   wrapAsync(editListingPage));
 

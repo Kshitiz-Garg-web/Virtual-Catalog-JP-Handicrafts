@@ -14,8 +14,8 @@ const listingSchema = new Schema({
     filename:String,
   },
   price: Number,
-  location: String,
-  country: String,
+  dimension: String,
+  material: String,
   reviews: [
     {
       type: Schema.Types.ObjectId,

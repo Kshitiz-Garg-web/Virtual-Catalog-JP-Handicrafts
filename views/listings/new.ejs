@@ -6,7 +6,9 @@
     <div class="row">
       <div class="col-8 offset-2">
 
-        <h3 class="mt-2 mt-md-1  ">Add a New Listing on Sphere</h3>
+        <h3 class="mt-2 mt-md-1  ">
+          Add a New Listing
+        </h3>
 
         <form class="needs-validation" action="/listings" method="POST" novalidate enctype="multipart/form-data">
           <div class="mb-3">
@@ -38,16 +40,16 @@
             </div>
 
             <div class="mb-3 col-md-8">
-              <label for="country" class="form-label">Country</label>
-              <input required id="country" class="form-control" name="listing[country]" type="text" />
+              <label for="material" class="form-label">Material</label>
+              <input required id="material" class="form-control" name="listing[material]" type="text" />
               <div class="valid-feedback">Looks good!</div>
               <div class="invalid-feedback">Please fill it in.</div>
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input required id="location" class="form-control" name="listing[location]" type="text" />
+            <label for="dimension" class="form-label">Dimension</label>
+            <input required id="dimension" class="form-control" name="listing[dimension]" type="text" />
             <div class="valid-feedback">Looks good!</div>
             <div class="invalid-feedback">Please fill it in.</div>
           </div>

@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 // const cookieParser = require('cookie-parser')
 const seassion = require("express-session")
+const mongoStore = require('connect-mongo')
 const flash = require("connect-flash")
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
@@ -19,16 +20,31 @@ const listingRouter = require('./routes/listing.js')
 const reviewRouter = require('./routes/review.js')
 const userRouter = require('./routes/user.js')
 //Model
-const User = require("./models/user.js")
+const User = require("./models/user.js");
+const MongoStore = require('connect-mongo');
 //middleware
 
 
 
 
 const app = express();
-const MONGO_URL = "mongodb://127.0.0.1:27017/VirtualCatalog";
+const dbUrl = process.env.ATLASDB_URL;
+
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: process.env.MONGO_ENCRYPT_SECRET
+  },
+  touchAfter: 24 * 60 * 60,
+})
+
+store.on('error', (err) => {
+  console.log('ERROR in the Mongo Sseassion Store - ', err)
+})
+
 const seassionOptions = {
-  secret: "mysuperpassofsec",
+  store,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -44,11 +60,11 @@ main()
     console.log("connected");
   })
   .catch((err) => {
-    console.log(err);
+    console.log("Mongoose Connection Error:", err);
   });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 app.set("view engine", "ejs");
@@ -72,21 +88,16 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-
-app.get("/", (req, res) => {
-  res.send("yes i am root");
-});
-
 app.use((req, res, next) => {
   res.locals.success = req.flash('success')
   res.locals.error = req.flash('error')
   res.locals.currUser = req.user;
-  console.log("success key -> ", res.locals.success)
-  console.log("error key -> ", res.locals.error)
   next()
 })
 
+app.get("/", (req, res) => {
+  res.render("home.ejs");
+})
 app.use("/listings", listingRouter)
 app.use('/listings/:id/reviews', reviewRouter)
 app.use('/', userRouter)
@@ -100,7 +111,7 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(8080, () => {
+app.listen(8000, () => {
   console.log("server is listening to port 8080");
 });
 
