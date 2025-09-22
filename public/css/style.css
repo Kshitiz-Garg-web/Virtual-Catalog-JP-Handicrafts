@@ -898,3 +898,13 @@ ul li {
 input::placeholder {
   color: #797878 !important;
 }
+
+/* flash msg improvment */
+.alert{
+  /* background-color: rgb(143, 136, 136) !important; */
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+  width: 90%;
+  margin-inline: auto;
+}
