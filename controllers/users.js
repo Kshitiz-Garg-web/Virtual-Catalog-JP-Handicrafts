@@ -16,7 +16,7 @@ module.exports.signup_addCredentials = async (req, res, next) => {
       if (err) {
         return next(err)
       }
-      req.flash('success', "Welcome to Sphere")
+      req.flash('success', "Namaste! Explore the beauty of JP Handicrafts.")
       return res.redirect('/listings')
     })
   } catch (e) {
@@ -32,7 +32,7 @@ module.exports.loginPage = (req, res) => {
 
 // login, check_Credentials, Post
 module.exports.login_checkCredentials = async (req, res) => {
-  req.flash('success', "Welcome back to Sphere")
+  req.flash('success', "Namaste! Explore the beauty of JP Handicrafts.")
   res.redirect('/listings')
 }
 
@@ -42,7 +42,7 @@ module.exports.logout = (req, res, next) => {
     if (err) {
       return next(err)
     }
-    req.flash('success', "you are logged out!")
+    req.flash('success', "You’ve logged out. Come back soon to JP Handicrafts!")
     return res.redirect('/listings')
   })
 }

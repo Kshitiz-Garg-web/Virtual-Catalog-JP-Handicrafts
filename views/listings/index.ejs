@@ -5,11 +5,11 @@
     <p><b><i>Each creation reflects love, culture & blessings — JP Handicrafts 🧵🎨</i></b></p>
     <hr>
 
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <div class="index-listing-wrapper">
 
       <% for (let listing of allListings) { %>
-        <a href="/listings/<%= listing._id %>" class="listing-link">
-          <div class="card">
+        <a href="/listings/<%= listing._id %>" class="listing-link indexCardSetting">
+          <div class="card ">
             <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem" />
             <div class="card-body">
               <p class="card-text">

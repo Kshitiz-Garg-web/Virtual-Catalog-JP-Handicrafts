@@ -1,7 +1,7 @@
 <% layout('/layouts/boilerplate') -%>
 
   <body>
-    <div class="container py-5">
+    <div class="container my-0 py-0 py-md-5 my-md-5 ">
 
       <!-- Hero Section -->
       <div class="row align-items-center mb-5">
@@ -11,90 +11,299 @@
             craftsmanship.</p>
           <a href="/listings" class="btn btn-primary btn-lg mt-3">Explore Our Craft</a>
         </div>
-        <div class="banner-img col-md-6 text-center">
+        <div class="banner-img col-md-6 text-center mb-5">
           <img src="/images/logo_banner_1.png" class="img-fluid rounded shadow" alt="JP Handicrafts">
         </div>
       </div>
 
-      <!-- About Section -->
-      <div id="about" class="mb-5">
-        <h2 class="text-center fw-bold mb-4">About JP Handicrafts</h2>
-        <p class="text-center mb-4">We’ve been crafting unique art pieces and divine figures with love and precision for
-          over a decade. With our own manufacturing unit and countless happy customers, we deliver excellence in every
-          piece.</p>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">Resin & Marble Art</h5>
-                <ul>
-                  <li>God Figures</li>
-                  <li>Fountains</li>
-                  <li>Paintings</li>
-                  <li>Pillars</li>
-                  <li>Animals</li>
-                  <li>Tables</li>
-                  <li>Couples</li>
-                </ul>
-              </div>
+
+      <!-- <section class="card_motion">
+        <div class="slider-container">
+          <div class="slider">
+            <div class="slider-card card11">
+              <img src="./images/1st.jpg" alt="Product 1" />
+            </div>
+            <div class="slider-card card11">
+              <img src="./images/4th.jpg" alt="Product 1" />
+            </div>
+            <div class="slider-card card22">
+              <img src="images/3rd.jpeg" alt="Product 1" />
+            </div>
+            <div class="slider-card card22">
+              <img src="./images/2nd.jpeg" alt="Product 1" />
             </div>
           </div>
-          <div class="col-md-4 mt-4 mt-md-0">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">Board Paintings</h5>
-                <ul>
-                  <li>Modern Art</li>
-                  <li>3D Paintings</li>
-                  <li>Crystal Paintings</li>
-                </ul>
+        </div>
+      </section> -->
+
+      <div class="row">
+        <div class="col-12">
+          <section class="card_motion rounded mb-5">
+            <div class="slider-container">
+              <div class="slider">
+                <div class="slider-card card11">
+                  <img src="./images/3dFrame1.jpg" alt="Product_1" />
+                </div>
+                <div class="slider-card card22">
+                  <img src="images/3dFrame3.jpg" alt="Product_3" />
+                </div>
+                <div class="slider-card card11">
+                  <img src="./images/3dFrame4.jpg" alt="Product_4" />
+                </div>
+                <div class="slider-card card22">
+                  <img src="./images/3dFrame2.jpg" alt="Product_2" />
+                </div>
               </div>
             </div>
+          </section>
+        </div>
+      </div>
+
+
+
+      <section class="about-section" id="about">
+        <div class="container">
+          <div class="text-center fade-in">
+            <h2 class="about-title">About JP Handicrafts</h2>
+            <p class="about-description">We've been crafting unique art pieces and divine figures with love and
+              precision for over a decade. With our own manufacturing unit and countless happy customers, we deliver
+              excellence in every piece.</p>
           </div>
-          <div class="col-md-4 mt-4 mt-md-0">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">Iron & Wooden Work</h5>
-                <ul>
-                  <li>Bhagwan Ji ke Jhule</li>
-                  <li>Sofa Sets</li>
-                  <li>Bard Designs</li>
-                  <li>Krishna Ji ki Matki</li>
-                </ul>
+
+          <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+              <div class="category-card fade-in">
+                <h5 class="category-title">Resin & Marble Art</h5>
+                <div class="category-buttons">
+                  <div class="category-btn">
+                    <span>God Figures</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Ganesha Sculptures</div>
+                      <div class="dropdown-item">Krishna Statues</div>
+                      <div class="dropdown-item">Shiva Figurines</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>Fountains</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Indoor Fountains</div>
+                      <div class="dropdown-item">Garden Fountains</div>
+                      <div class="dropdown-item">Wall Fountains</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>Paintings</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Abstract Art</div>
+                      <div class="dropdown-item">Religious Paintings</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>Pillars</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Decorative Pillars</div>
+                      <div class="dropdown-item">Temple Pillars</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>Animals</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Elephant Sculptures</div>
+                      <div class="dropdown-item">Lion Statues</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>Tables</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Coffee Tables</div>
+                      <div class="dropdown-item">Side Tables</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>Couples</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Radha Krishna</div>
+                      <div class="dropdown-item">Modern Couples</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+              <div class="category-card fade-in" style="animation-delay: 0.2s;">
+                <h5 class="category-title">Board Paintings</h5>
+                <div class="category-buttons">
+                  <div class="category-btn">
+                    <span>Modern Art</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Contemporary Designs</div>
+                      <div class="dropdown-item">Minimalist Art</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>3D Paintings</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Relief Artwork</div>
+                      <div class="dropdown-item">Textured Panels</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>Crystal Paintings</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">LED Backlit</div>
+                      <div class="dropdown-item">Natural Crystal</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+              <div class="category-card fade-in" style="animation-delay: 0.4s;">
+                <h5 class="category-title">Iron & Wooden Work</h5>
+                <div class="category-buttons">
+                  <div class="category-btn">
+                    <span>Bhagwan Jhule</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Traditional Swings</div>
+                      <div class="dropdown-item">Modern Jhulas</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>Sofa Sets</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Wooden Sofas</div>
+                      <div class="dropdown-item">Iron Frame Sets</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>Bard Designs</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Custom Barriers</div>
+                      <div class="dropdown-item">Decorative Screens</div>
+                    </div>
+                  </div>
+                  <div class="category-btn">
+                    <span>Krishna Matki</span>
+                    <div class="category-dropdown">
+                      <div class="dropdown-item">Traditional Pots</div>
+                      <div class="dropdown-item">Decorative Vessels</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Experience & Quality Section -->
-      <div class="bg-light rounded p-4 shadow-sm mt-5">
-        <h3 class="text-center fw-bold mb-3">Why Choose JP Handicrafts?</h3>
-        <div class="row exp-container">
-          <div class="col-md-6 exp-container-left">
-            <p>With over <strong>10 years</strong> of manufacturing experience, JP Handicrafts specializes in delivering
-              high-quality handcrafted products directly to <strong>wholesalers across India</strong>. Our in-house
-              production ensures unmatched quality, consistency, and customizability for bulk orders.</p>
-            <br>
-            <p>Backed by a dedicated team of artisans and modern infrastructure, we guarantee timely deliveries and
-              scalable production for growing business needs.</p>
+      <!-- Why Choose JP Handicrafts Section -->
+      <section class="why-choose-section mt-5">
+        <div class="container">
+          <div class="text-center mb-5">
+            <h3 class="why-choose-title">Why Choose JP Handicrafts?</h3>
           </div>
-          
-          <div class="col-md-6 exp-container-right">
-            <ul>
-              <ul>
-                <li>Direct Manufacturer – No Middlemen, Best Prices Guaranteed with Full Production Control</li>
-                <li>Pan-India Bulk Supply for Wholesalers with Timely Delivery and Hassle-Free Logistics</li>
-                <li>Custom Designs & Finishing Options to Match Your Brand, Style, and Specifications</li>
-                <li>Consistent Quality, Reliable Packaging for Safe Transit and Long-Term Product Integrity</li>
-                <li>Trusted by Distributors Across India for Years, Ensuring Repeat Orders and Satisfaction</li>
-              </ul>
 
-            </ul>
+          <!-- Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-number">10+</span>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">500+</span>
+              <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">100%</span>
+              <div class="stat-label">Quality Assured</div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">24/7</span>
+              <div class="stat-label">Support</div>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-lg-6 my-md-auto">
+              <div class="experience-card slide-in-left ">
+                <h2 class="years-badge mb-5">Manufacturing Excellence</h2>
+                <p class="experience-text">
+                  With over <strong>10 years</strong> of manufacturing experience, JP Handicrafts specializes in
+                  delivering high-quality handcrafted products directly to <strong>wholesalers across India</strong>.
+                  Our in-house production ensures unmatched quality, consistency, and customizability for bulk orders.
+                </p>
+                <br>
+                <p class="experience-text">
+                  Backed by a dedicated team of artisans and modern infrastructure, we guarantee timely deliveries and
+                  scalable production for growing business needs.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="features-enhanced slide-in-right">
+                <div class="feature-enhanced">
+                  <div class="feature-icon-enhanced">
+                    <i class="fas fa-industry"></i>
+                  </div>
+                  <div class="feature-text-enhanced">
+                    <strong>Direct Manufacturer</strong> – No Middlemen, Best Prices Guaranteed with Full Production
+                    Control
+                  </div>
+                </div>
+
+                <div class="feature-enhanced">
+                  <div class="feature-icon-enhanced">
+                    <i class="fas fa-shipping-fast"></i>
+                  </div>
+                  <div class="feature-text-enhanced">
+                    <strong>Pan-India Bulk Supply</strong> for Wholesalers with Timely Delivery and Hassle-Free
+                    Logistics
+                  </div>
+                </div>
+
+                <div class="feature-enhanced">
+                  <div class="feature-icon-enhanced">
+                    <i class="fas fa-paint-brush"></i>
+                  </div>
+                  <div class="feature-text-enhanced">
+                    <strong>Custom Designs & Finishing</strong> Options to Match Your Brand, Style, and Specifications
+                  </div>
+                </div>
+
+                <div class="feature-enhanced">
+                  <div class="feature-icon-enhanced">
+                    <i class="fas fa-medal"></i>
+                  </div>
+                  <div class="feature-text-enhanced">
+                    <strong>Consistent Quality</strong>, Reliable Packaging for Safe Transit and Long-Term Product
+                    Integrity
+                  </div>
+                </div>
+
+                <div class="feature-enhanced">
+                  <div class="feature-icon-enhanced">
+                    <i class="fas fa-handshake"></i>
+                  </div>
+                  <div class="feature-text-enhanced">
+                    <strong>Trusted by Distributors</strong> Across India for Years, Ensuring Repeat Orders and
+                    Satisfaction
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+
+
+
 
 
     </div>
+    <!-- <script src="/js/script.js"></script> -->
+    <!-- <script src="/js/3dMotionFrame.js"></script> -->
   </body>

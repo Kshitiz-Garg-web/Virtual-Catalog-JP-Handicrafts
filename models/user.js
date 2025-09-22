@@ -7,9 +7,13 @@ const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
+    // unique: true,   // 👈 add this
+    // trim: true,     // optional: spaces remove karega
+    // lowercase: true // optional: email ko lower case store karega
   }
 });
 
+// UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', UserSchema);
