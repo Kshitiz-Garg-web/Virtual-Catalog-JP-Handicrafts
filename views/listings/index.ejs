@@ -12,14 +12,27 @@
           <div class="card ">
             <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem" />
             <div class="card-body">
-              <p class="card-text">
-                <b>
-                  <%= listing.title %>
-                </b>
-                <br />
-                <b> &#8377;</b>
-                <%= listing.price.toLocaleString('en-IN')%> / Pic <br>
+              <p class="mb-0">
+                <%= listing.title.length>= 35
+                  ? listing.title.substring(0, 35) + '...'
+                  : listing.title%>
               </p>
+              <div class="price_comment">
+                <span class="price"><b>&#8377; </b>
+                  <%= listing.price.toLocaleString('en-IN')%> / Pic
+                </span>
+                <span class="comment">
+                  <%= listing.reviews.length %>
+                   <% if(listing.reviews.length>0) { %>
+                    <i class="fa-regular fa-comment"></i>
+                  <% } %>
+                   <% if(listing.reviews.length==0) { %>
+                    <i class="fa-solid fa-comment-slash" style="color: #000000;"></i>
+                  <% } %>
+                </span>
+              </div>
+              <br>
+
             </div>
           </div>
         </a>

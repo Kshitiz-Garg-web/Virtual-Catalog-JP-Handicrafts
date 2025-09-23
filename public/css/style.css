@@ -129,6 +129,44 @@ nav img {
   color: #fff !important;
 }
 
+/* index page ka hi h only */
+.card-body {
+  /* background-color: red; */
+}
+
+.card-body p {
+  /* background-color: green; */
+}
+
+.card-body .price_comment {
+  /* background-color: yellow; */
+  position: relative;
+}
+
+.card-body .price_comment .comment {
+
+  border-radius: 100%;
+  padding: 3px;
+  position: absolute;
+  right: 0%;
+  top: -15%;
+
+}
+
+.card-body .price_comment .comment i {
+  /* background-color: #000000; */
+  padding: 7px;
+  transition: all .3s ease-in-out;
+  border-radius: 100%;
+  color: #000000;
+}
+
+.card-body:has(.price_comment:hover) .comment i {
+  background-color: #5873e04d;
+  
+}
+
+
 /* cards k styling hai ab jo ki index.ejs per s ari h  */
 .index-listing-wrapper {
   display: flex;
@@ -155,8 +193,6 @@ nav img {
 .indexCardSetting {
   width: 296px !important;
   padding: 0 !important;
-
-
 }
 
 .card-img-top {
@@ -386,7 +422,7 @@ ul li {
   overflow: hidden;
   box-shadow: #2c3e50;
   /* background-color: red; */
- 
+
 }
 
 .slider {
@@ -900,7 +936,7 @@ input::placeholder {
 }
 
 /* flash msg improvment */
-.alert{
+.alert {
   /* background-color: rgb(143, 136, 136) !important; */
   display: flex;
   justify-content: space-between;
