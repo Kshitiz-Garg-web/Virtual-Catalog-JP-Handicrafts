@@ -1,41 +1,61 @@
 <% layout('/layouts/boilerplate') -%>
 
   <body>
-    <h4>✨ Namaste...</h4>
-    <p><b><i>Each creation reflects love, culture & blessings — JP Handicrafts 🧵🎨</i></b></p>
+    <h4 class="mx-2">✨ Namaste...</h4>
+    <div class="searchContainer">
+      <span class="brand-text"><b><i>Each creation reflects love, culture & blessings — JP Handicrafts
+            🧵🎨</i></b></span>
+      <nav class="navbar">
+        <div class="container-fluid">
+          <form class="d-flex" role="search" id="searchForm">
+            <i class=" search-icon fas fa-search "></i>
+            <input class="form-control me-2" type="search" placeholder="Search by product title or material..."
+              aria-label="Search" id="searchInput" />
+            <!-- <button class="btn" type="submit">Search</button>
+          <button class="btn btn-outline-secondary ms-2" type="button" id="clearSearch">Clear</button> -->
+          </form>
+        </div>
+      </nav>
+    </div>
     <hr>
 
+    <!-- No results message -->
+    <div id="noResults" class="text-center text-muted" style="display: none; margin-top: 50px;">
+      <i class="fas fa-search fa-3x mb-3"></i>
+      <p>No products found matching your search.</p>
+    </div>
+
     <div class="index-listing-wrapper">
-
       <% for (let listing of allListings) { %>
-        <a href="/listings/<%= listing._id %>" class="listing-link indexCardSetting">
-          <div class="card ">
-            <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem" />
-            <div class="card-body">
-              <p class="mb-0">
-                <%= listing.title.length>= 35
-                  ? listing.title.substring(0, 35) + '...'
-                  : listing.title%>
-              </p>
-              <div class="price_comment">
-                <span class="price"><b>&#8377; </b>
-                  <%= listing.price.toLocaleString('en-IN')%> / Pic
-                </span>
-                <span class="comment">
-                  <%= listing.reviews.length %>
-                   <% if(listing.reviews.length>0) { %>
-                    <i class="fa-regular fa-comment"></i>
-                  <% } %>
-                   <% if(listing.reviews.length==0) { %>
-                    <i class="fa-solid fa-comment-slash" style="color: #000000;"></i>
-                  <% } %>
-                </span>
+        <div class="listing-card" data-title="<%= listing.title.toLowerCase() %>"
+          data-material="<%= listing.material ? listing.material.toLowerCase() : '' %>">
+          <a href="/listings/<%= listing._id %>" class="listing-link indexCardSetting">
+            <div class="card">
+              <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem" />
+              <div class="card-body">
+                <p class="mb-0">
+                  <%= listing.title.length>= 35
+                    ? listing.title.substring(0, 35) + '...'
+                    : listing.title %>
+                </p>
+                <div class="price_comment">
+                  <span class="price"><b>&#8377; </b>
+                    <%= listing.price.toLocaleString('en-IN') %> / Pic
+                  </span>
+                  <span class="comment">
+                    <% if(listing.reviews.length> 0) { %>
+                      <i class="fa-regular fa-comment"></i>
+                      <% } else { %>
+                        <i class="fa-solid fa-comment-slash" style="color: #000000;"></i>
+                        <% } %>
+                          <%= listing.reviews.length %>
+                  </span>
+                </div>
               </div>
-              <br>
-
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
         <% } %>
     </div>
+    <script src="/js/index.js"></script>
   </body>
