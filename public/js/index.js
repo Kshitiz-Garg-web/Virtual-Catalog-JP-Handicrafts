@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
       const searchInput = document.getElementById('searchInput');
       const searchForm = document.getElementById('searchForm');
-      const clearBtn = document.getElementById('clearSearch');
+      // const clearBtn = document.getElementById('clearSearch');
       const noResults = document.getElementById('noResults');
       const allListings = document.querySelectorAll('.listing-card');
 
@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
           const title = listing.getAttribute('data-title');
           const materials = listing.getAttribute('data-material');
           
-          // Check if search matches title or materials
           const titleMatch = title.includes(searchTerm);
           const materialMatch = materials.includes(searchTerm);
           
@@ -25,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        // Show/hide no results message
+        // search product available h ya n show krna 
         if (visibleCount === 0 && searchTerm !== '') {
           noResults.style.display = 'block';
         } else {
@@ -45,9 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       // Clear search
-      clearBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        filterListings('');
-        searchInput.focus();
-      });
+      // clearBtn.addEventListener('click', function() {
+      //   searchInput.value = '';
+      //   filterListings('');
+      //   searchInput.focus();
+      // });
     });

@@ -243,6 +243,7 @@ nav img {
   color: rgb(0, 0, 0);
   border-color: white;
   min-width: 66px;
+  transition: all .3s ease-in-out;
 }
 
 .searchContainer .navbar form button:hover {
@@ -269,6 +270,38 @@ nav img {
     width: 100%;
     margin-top: 4px !important;
   }
+
+  .searchContainer .navbar form .search-icon{
+    left:17px;
+    top: 15px;
+  }
+
+
+}
+
+@media (max-width: 470px) {
+  .searchContainer .navbar form{
+    flex-direction: column;
+    align-items: start;
+  }
+  .searchContainer .navbar form button {
+  flex-shrink: 0;
+  white-space: nowrap;
+  color: rgb(0, 0, 0);
+  border-color: white;
+  /* min-width: 66px; */
+  margin-top: 6px;
+  width: 100px !important;
+  /* margin-inlinet: 20%; */
+  /* background-color: red !important; */
+
+}
+
+.searchContainer .navbar form button:hover {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
 }
 
 /* Very small screens ke liye */
@@ -288,10 +321,10 @@ nav img {
     margin: 0;
   }
 
-  .searchContainer .navbar form button {
+  /* .searchContainer .navbar form button {
     width: 100%;
     background-color: #3b3a3a93;
-  }
+  } */
 }
 
 /* Very small screens ke liye */
